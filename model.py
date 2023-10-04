@@ -5,6 +5,7 @@ from sklearn.decomposition import PCA
 
 class clasifier(nn.Module):
     def __init__(self, backbone, n_dim):
+        super(clasifier, self).__init__()
         self.backbone = backbone
         self.fc = nn.Linear(384, n_dim)
 
