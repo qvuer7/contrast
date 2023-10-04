@@ -12,7 +12,7 @@ class clasifier(nn.Module):
     def forward(self, x):
         features1 = self.backbone(x)
         features2 = self.fc(features1)
-        features2 = F.normalize(features2)
+        features2 = F.normalize(features2, dim = 1)
         return features2
 
 def get_dino_features(dino, images):
