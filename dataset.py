@@ -78,7 +78,7 @@ def get_data_loaders(train_r = 0.7, test_r = 0.2, val_r = 0.1, path = None):
     train_data, test_data, val_data = split_dict(data_dict, train_r, test_r, val_r)
     train_transforms = transforms_v2.Compose(
         [
-            transforms_v1.Resize((768, 768), transforms_v1.InterpolationMode.BILINEAR),
+            transforms_v1.Resize((784, 784), transforms_v1.InterpolationMode.BILINEAR),
             transforms_v1.ColorJitter(contrast=0.5),
             transforms_v1.Grayscale(num_output_channels=3),
             transforms_v1.GaussianBlur(kernel_size=5),
@@ -91,7 +91,7 @@ def get_data_loaders(train_r = 0.7, test_r = 0.2, val_r = 0.1, path = None):
 
     test_transforms = transforms_v2.Compose(
         [
-            transforms_v1.Resize((768, 768), transforms_v1.InterpolationMode.BILINEAR),
+            transforms_v1.Resize((784, 784), transforms_v1.InterpolationMode.BILINEAR),
             transforms_v1.ToTensor(),
         ])
 
