@@ -2,6 +2,7 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 from sklearn.decomposition import PCA
+import numpy as np
 
 class clasifier(nn.Module):
     def __init__(self, backbone, n_dim):
