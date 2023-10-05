@@ -10,11 +10,14 @@ class contrastive_loss(nn.Module):
         self.temperature = temperature
 
     def forward(self, features, labels):
+        device = (torch.device('cuda')
+                  if features.is_cuda
+                  else torch.device('cpu'))
 
         features = features.view(features.shape[0], features.shape[1], -1)
         batch_size = features.shape[0]
         labels = labels.contiguous().view(-1, 1)
-        mask = torch.eq(labels, labels.T).float()
+        mask = torch.eq(labels, labels.T).float().to(device)
         contrast_count = features.shape[1]
         contrast_feature = torch.cat(torch.unbind(features, dim=1), dim=0)
         anchor_feature = contrast_feature
@@ -32,7 +35,7 @@ class contrastive_loss(nn.Module):
         logits_mask = torch.scatter(
             torch.ones_like(mask),
             1,
-            torch.arange(batch_size * anchor_count).view(-1, 1),
+            torch.arange(batch_size * anchor_count).view(-1, 1).to(device),
             0
         )
         mask = mask * logits_mask

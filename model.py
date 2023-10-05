@@ -28,3 +28,6 @@ def get_feature_image(feature):
   pca_features = pca_features * 255
   pca_features = pca_features.reshape(56, 56, 3).astype(np.uint8)
   return pca_features
+
+if __name__ == '__main__':
+    dino = torch.hub.load('facebookresearch/dinov2', 'dinov2_vits14', pretrained = True)
